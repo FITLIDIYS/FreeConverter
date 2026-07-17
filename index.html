@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML / PDF → Markdown Converter</title>
+
+<!-- Third-party libs (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turndown/7.1.2/turndown.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turndown-plugin-gfm/1.0.2/turndown-plugin-gfm.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>HTML / PDF → Markdown Converter</h1>
+    <p>Upload file <strong>.htm / .html</strong> atau <strong>.pdf</strong> (bisa dicampur, bisa banyak sekaligus), lalu convert jadi Markdown. Semua proses jalan di browser kamu — tidak ada file yang diupload ke server manapun.</p>
+  </header>
+
+  <div class="panel">
+    <div class="dropzone" id="dropzone">
+      <div class="icon">📄→📝</div>
+      <div class="main">Klik untuk pilih file, atau drag & drop ke sini</div>
+      <div class="sub">Mendukung banyak file sekaligus (.htm, .html, .pdf)</div>
+      <input type="file" id="fileInput" multiple accept=".htm,.html,.pdf,text/html,application/pdf">
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-group-title">Opsi HTML</div>
+      <div class="row">
+        <label class="opt"><input type="checkbox" id="optGfm" checked> Tabel & strikethrough (GFM)</label>
+        <label class="opt"><input type="checkbox" id="optFrontmatter" checked> Tambah judul sebagai H1 jika belum ada</label>
+        <label class="opt"><input type="checkbox" id="optStripNav"> Buang elemen nav/header/footer/script/style</label>
+      </div>
+    </div>
+
+    <div class="opt-group">
+      <div class="opt-group-title">Opsi PDF</div>
+      <div class="row">
+        <label class="opt"><input type="checkbox" id="optPdfHeadings" checked> Deteksi heading dari ukuran font</label>
+        <label class="opt"><input type="checkbox" id="optPdfPageBreaks" checked> Tandai batas tiap halaman</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="listPanel" style="display:none;">
+    <div class="toolbar">
+      <div class="count" id="fileCount">0 file</div>
+      <div class="actions">
+        <button id="convertAllBtn" class="primary">Convert Semua</button>
+        <button id="downloadZipBtn" disabled>Download .zip</button>
+        <button id="clearBtn">Kosongkan</button>
+      </div>
+    </div>
+    <ul class="filelist" id="fileList"></ul>
+  </div>
+
+  <div class="panel preview-panel" id="previewPanel">
+    <div class="preview-tabs">
+      <button class="active" data-mode="md" id="tabMd">Markdown</button>
+      <button data-mode="src" id="tabSrc">Sumber Asli</button>
+    </div>
+    <textarea id="previewArea" readonly></textarea>
+  </div>
+
+  <div class="panel" id="emptyState">
+    <div class="empty">Belum ada file. Upload file .htm/.html atau .pdf untuk mulai.</div>
+  </div>
+
+  <footer>Konversi 100% lokal di browser — cocok untuk dokumentasi VBS4 Sim SDK, manual PDF, atau file HTML lainnya.</footer>
+</div>
+
+<!-- App scripts (plain scripts, not modules, so this works via double-click / file:// too) -->
+<script src="js/utils.js"></script>
+<script src="js/html-to-md.js"></script>
+<script src="js/pdf-to-md.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

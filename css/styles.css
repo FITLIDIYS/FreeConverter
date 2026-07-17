@@ -1,261 +1,379 @@
-:root{
-  --bg: #0f1115;
-  --panel: #171a21;
-  --panel-2: #1e2229;
-  --border: #2a2f3a;
-  --text: #e7e9ee;
-  --muted: #9aa2b1;
-  --accent: #5b8def;
-  --accent-2: #3fd0a0;
-  --danger: #e2574c;
-  --pdf-tag: #e2a33c;
-  --radius: 10px;
+/* Import font Serif Mewah (Cinzel) dan Teknis (Space Mono) */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Space+Mono&display=swap');
+
+:root {
+  /* Palet disesuaikan dengan gambar: Obsidian Black, Tarnished Silver, Dark Rose */
+  --panel: rgba(12, 12, 14, 0.92);      /* Hitam pekat transparan untuk panel */
+  --panel-2: rgba(22, 24, 28, 0.95);    /* Slate sangat gelap */
+  --border: #525660;                    /* Warna perak kusam (tarnished silver) */
+  --border-glow: rgba(176, 184, 199, 0.3);
+  --text: #e8eaed;                      /* Putih perak terang untuk teks utama */
+  --muted: #8e95a3;                     /* Abu-abu perak redup */
+  --accent: #b0b8c7;                    /* Perak terang */
+  --danger: #801212;                    /* Merah mawar gelap (Dark Rose) */
+  --pdf-tag: #8c7853;                   /* Perunggu pudar */
+  --radius: 12px;                       
+  --pill-radius: 50px;
 }
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
-  background: var(--bg);
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; 
   color: var(--text);
   min-height: 100vh;
+  
+  /* Menerapkan Latar Belakang Gambar yang Kamu Minta */
+  background-image: url('image_2b222d.jpg');
+  background-repeat: repeat;
+  background-size: 500px; /* Ukuran bisa diatur agar ornamen terlihat proporsional */
+  background-attachment: fixed; /* Latar belakang tidak ikut scroll */
+  background-color: #050505; /* Warna cadangan */
 }
-.wrap{
-  max-width: 980px;
+
+.wrap {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 32px 20px 60px;
+  padding: 40px 20px 60px;
 }
-header{
-  margin-bottom: 24px;
+
+header {
+  margin-bottom: 40px;
+  text-align: center;
+  /* Tambahan panel gelap di belakang judul agar tidak menabrak pattern background */
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(82, 86, 96, 0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
-h1{
-  font-size: 1.5rem;
-  margin: 0 0 6px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: var(--text);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
-header p{
+
+h1::before, h1::after {
+  content: " ✠ ";
   color: var(--muted);
-  margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 1.6rem;
+  vertical-align: middle;
+  padding: 0 12px;
 }
-.panel{
+
+header p {
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 auto;
+}
+
+.panel {
   background: var(--panel);
+  /* Efek Blur (Kaca Gelap) agar pattern mawar di belakang membayang halus */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.05);
+  padding: 28px;
+  margin-bottom: 24px;
 }
-.dropzone{
+
+.dropzone {
   border: 2px dashed var(--border);
   border-radius: var(--radius);
-  padding: 36px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 40px 20px;
   text-align: center;
   cursor: pointer;
-  transition: border-color .15s ease, background .15s ease;
+  transition: all 0.3s ease;
 }
-.dropzone:hover, .dropzone.drag{
+
+.dropzone:hover, .dropzone.drag {
   border-color: var(--accent);
-  background: rgba(91,141,239,0.06);
+  background: rgba(176, 184, 199, 0.08);
+  box-shadow: inset 0 0 20px rgba(176, 184, 199, 0.05);
 }
-.dropzone .icon{
-  font-size: 2rem;
-  margin-bottom: 8px;
+
+.dropzone .icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--muted);
+  transition: color 0.3s;
 }
-.dropzone .main{
+
+.dropzone:hover .icon { color: var(--accent); }
+
+.dropzone .main {
   font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
 }
-.dropzone .sub{
+
+.dropzone .sub {
   color: var(--muted);
   font-size: 0.85rem;
 }
-input[type=file]{ display:none; }
 
-.opt-group{
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
+input[type=file] { display: none; }
+
+.opt-group {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(82, 86, 96, 0.4);
 }
-.opt-group-title{
-  font-size: 0.78rem;
+
+.opt-group-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 2px;
   color: var(--muted);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
-.row{
+
+.row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
-label.opt{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-size: 0.85rem;
-  color: var(--muted);
-  background: var(--panel-2);
-  border: 1px solid var(--border);
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-label.opt input{ accent-color: var(--accent); }
 
-button{
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 8px;
+label.opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: rgba(0,0,0,0.3);
   border: 1px solid var(--border);
-  padding: 9px 16px;
+  padding: 8px 16px;
+  border-radius: var(--pill-radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+label.opt:hover {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.05);
+}
+
+label.opt input {
+  accent-color: var(--muted);
+  filter: grayscale(100%);
+}
+
+/* TOMBOL MODERN PILL dengan nuansa logam/darah */
+button {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: var(--pill-radius);
+  border: 1px solid var(--border);
+  padding: 10px 22px;
   cursor: pointer;
   background: var(--panel-2);
   color: var(--text);
-  transition: transform .06s ease, border-color .15s ease;
-}
-button:hover{ border-color: var(--accent); }
-button:active{ transform: scale(0.97); }
-button.primary{
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #0b0f16;
-}
-button.primary:hover{ filter: brightness(1.08); }
-button:disabled{
-  opacity: 0.4;
-  cursor: not-allowed;
+  transition: all 0.2s ease;
 }
 
-.toolbar{
-  display:flex;
+button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 10px var(--border-glow);
+}
+
+button:active { transform: scale(0.97); }
+
+button.primary {
+  background: var(--text);
+  color: #050505;
+  border-color: var(--text);
+  font-weight: bold;
+}
+
+button.primary:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+button:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+
+.toolbar {
+  display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-.toolbar .count{
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-.toolbar .actions{
-  display:flex;
-  gap: 8px;
+  margin-bottom: 16px;
 }
 
-ul.filelist{
-  list-style:none;
-  margin:0; padding:0;
+.toolbar .count {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.toolbar .actions { display: flex; gap: 10px; }
+
+ul.filelist {
+  list-style: none;
+  margin: 0; padding: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-ul.filelist li{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  background: var(--panel-2);
+
+ul.filelist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.4);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 12px;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  transition: border 0.2s;
 }
-ul.filelist li .type{
+
+ul.filelist li:hover { border-color: var(--accent); }
+
+ul.filelist li .type {
+  font-family: 'Space Mono', monospace;
   font-size: 0.7rem;
   font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 5px;
-  flex-shrink: 0;
-  background: rgba(91,141,239,0.16);
-  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: var(--pill-radius);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
-ul.filelist li .type.pdf{
-  background: rgba(226,163,60,0.16);
+
+ul.filelist li .type.pdf {
+  border-color: var(--pdf-tag);
   color: var(--pdf-tag);
 }
-ul.filelist li .name{
+
+ul.filelist li .name {
   flex: 1;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  cursor: pointer;
 }
-ul.filelist li .size{
-  font-size: 0.78rem;
-  color: var(--muted);
-  flex-shrink:0;
-}
-ul.filelist li .status{
-  font-size: 0.76rem;
-  padding: 3px 9px;
-  border-radius: 20px;
-  flex-shrink:0;
-  font-weight:600;
-}
-.status.pending{ background:#2a2f3a; color: var(--muted); }
-.status.done{ background: rgba(63,208,160,0.14); color: var(--accent-2); }
-.status.error{ background: rgba(226,87,76,0.14); color: var(--danger); }
-ul.filelist li .dl{
-  font-size: 0.78rem;
-  color: var(--accent);
-  cursor: pointer;
-  text-decoration: none;
-  flex-shrink:0;
-}
-ul.filelist li .rm{
-  color: var(--muted);
-  cursor: pointer;
-  font-size: 1rem;
-  flex-shrink:0;
-  padding: 2px 4px;
-}
-ul.filelist li .rm:hover{ color: var(--danger); }
 
-.preview-panel{
-  display:none;
+ul.filelist li .size { font-size: 0.8rem; color: var(--muted); }
+
+ul.filelist li .status {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: var(--pill-radius);
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
-.preview-panel.show{ display:block; }
-.preview-tabs{
-  display:flex;
-  gap:6px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+
+.status.pending { border: 1px solid var(--border); color: var(--muted); }
+.status.done { background: rgba(176, 184, 199, 0.15); color: var(--accent); }
+/* Status Error menggunakan warna mawar gelap */
+.status.error { background: rgba(128, 18, 18, 0.2); color: #ff6b6b; border: 1px solid var(--danger); }
+
+ul.filelist li .dl { font-size: 0.8rem; color: var(--accent); text-decoration: none; font-weight: bold; }
+ul.filelist li .dl:hover { text-decoration: underline; text-shadow: 0 0 8px rgba(176,184,199,0.5); }
+
+ul.filelist li .rm {
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.2s, text-shadow 0.2s;
 }
-.preview-tabs button{
-  padding: 5px 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
+
+ul.filelist li .rm:hover { 
+  color: #ff6b6b; 
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.6); 
 }
-.preview-tabs button.active{
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #0b0f16;
+
+.preview-panel { display: none; }
+.preview-panel.show { display: block; }
+
+.preview-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: rgba(0,0,0,0.5);
+  padding: 4px;
+  border-radius: var(--pill-radius);
+  width: fit-content;
+  border: 1px solid var(--border);
 }
-textarea{
+
+.preview-tabs button {
+  border: none;
+  background: transparent;
+  padding: 6px 18px;
+  border-radius: var(--pill-radius);
+}
+
+.preview-tabs button.active {
+  background: var(--border);
+  color: var(--text);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+textarea {
   width: 100%;
   min-height: 340px;
-  background: #0b0d12;
+  background: rgba(0, 0, 0, 0.7);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.82rem;
-  line-height: 1.55;
+  border-radius: var(--radius);
+  padding: 16px;
+  font-family: 'Space Mono', Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
   resize: vertical;
 }
-.empty{
-  text-align:center;
-  color: var(--muted);
-  padding: 30px 0;
-  font-size: 0.88rem;
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 15px rgba(176,184,199,0.05);
 }
-footer{
-  text-align:center;
+
+.empty {
+  text-align: center;
   color: var(--muted);
-  font-size: 0.78rem;
-  margin-top: 20px;
+  padding: 40px 0;
+  font-size: 0.9rem;
 }
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius);
+  border: 1px solid rgba(82, 86, 96, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.8); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
